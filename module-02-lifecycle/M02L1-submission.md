@@ -1,0 +1,364 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "a4029442-ef14-4bf0-8da4-339a27019170",
+   "metadata": {},
+   "source": [
+    "# "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "bbf4ceed-d95b-450d-aaa3-e0dd432a2652",
+   "metadata": {},
+   "source": [
+    "# Submission: Module 2 Lab 1: Frame a Business Problem as a Machine Learning Problem"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a746abc9-c98c-4723-936f-d9802f2b9ae4",
+   "metadata": {
+    "jp-MarkdownHeadingCollapsed": true
+   },
+   "source": [
+    "Name: Alma Dolente   Date: 10/31/2026"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b960cb0e-a63f-4734-93ff-4e93e07d4a4d",
+   "metadata": {},
+   "source": [
+    "Fill this in as you work. Sections marked PREDICT must be written before you run the step.\n",
+    "\n",
+    "---\n",
+    "## 0. Your unique values\n",
+    "\n",
+    "These make your submission yours. Fill them in from your own account and your own run.\n",
+    "\n",
+    "- **The business request you chose and where it came from:** \n",
+    "\"We are losing money, trading stablecoins because our team is trying to do the math in their heads under pressure and guessing if the profit will be big enough to cover the hidden transaction fees.\"\n",
+    "\n",
+    "This would come from a trading desk employee at a trading firm after realizing there is a reoccurring pattern of financial losses on what should have been successful trades. \n",
+    "\n",
+    "- **Your computed decision threshold and the two dollar figures behind it:**\n",
+    "```\n",
+    "cost of a wrongly made trade (false positive): $500\n",
+    "cost of a missed trade (false negative): $10\n",
+    "\n",
+    "executue a trade whenever p(success) * 510 > 500\n",
+    "                          p(success)       > 500/510\n",
+    "                          p(success)       > 0.98\n",
+    "                          \n",
+    "```\n",
+    "- **The data risk you identified:** \n",
+    "spoofing data feed that can inject fake data into the market, which can manipulate a small exchange to display a fake price gap"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0df6a43d-1711-4fd8-a3a4-1f57e3e5593d",
+   "metadata": {},
+   "source": [
+    "## 1. Predictions\n",
+    "Write the prediction BEFORE running. Then run, record the actual, and explain the gap. A wrong prediction reasoned honestly earns full credit."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "43d64977-b563-40fb-a7f1-36695c55731f",
+   "metadata": {},
+   "source": [
+    "### Step 2: Before you compute anything, predict your threshold: do you think the right cutoff for your problem is closer to 0.05, 0.5, or 0.9? Write the number and one sentence of reasoning.\n",
+    "\n",
+    "**My prediction (written before running):**\n",
+    "\n",
+    "> I predict a classification model will use volume, gap size, fees, and recent failure rates to detect spoofed to trades. A 0.5 threshold will fall for these attacks, triggering false positives, which result in expensive wrongly made trades. However, a threshold closer to 0.9 like 0.98 will block the poisoned data. The trade-off is a few false negatives when the model accidentally filters out actual profitable trades.\n",
+    "\n",
+    "**What actually happened:**\n",
+    "\n",
+    "> Execution is pending. I sent a message to ask about where to find what to run for actual results. \n",
+    "\n",
+    "**Why the difference, or why I was right:**\n",
+    "\n",
+    "> Theoretically, my prediction is right because I used the cost matrix. Executing a wrongly made trade cost 50 times more than missing a missed trade. Any threshold lower than 0.98 would guarantee expected loss for the firm."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "af0eb5d2-881a-437f-99ce-1258de182528",
+   "metadata": {},
+   "source": [
+    "### Step 6: Before you write it, predict which single property will decide the question for your problem.\n",
+    "\n",
+    "**My prediction (written before running):**\n",
+    "\n",
+    "> I would argue against a foundation model for this problem because of latency.\n",
+    "\n",
+    "**What actually happened:**\n",
+    "\n",
+    "> In algorithmic trading systems a classification model returns a prediction fast. If the foundation model was used, inference would take much longer to process the inputs and generate a response, causing the system to miss the correct trades on time.\n",
+    "\n",
+    "**Why the difference, or why I was right:**\n",
+    "\n",
+    "> My prediction is correct because the deciding property for arbitrage is inference latency. Stablecoin price gaps appear for a few milliseconds before being closed. A foundation model is too slow and uses many resources to predict the right decision on time. The classification model is needed to process the order and execute the profitable trade rapidly."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "4ac8e547-e53d-455e-92ae-be6817a58f5d",
+   "metadata": {},
+   "source": [
+    "## 2. Break it on purpose\n",
+    "\n",
+    "Paste the exact error text. Not a description of it."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ef549364-a66b-4d3f-862b-80873009f050",
+   "metadata": {},
+   "source": [
+    "### Break 1: Set your threshold to 0.5 and compute how many unnecessary actions or missed cases that would produce, using your own cost figures.\n",
+    "\n",
+    "**Exact error or behavior I observed:**\n",
+    "\n",
+    "```\n",
+    "\n",
+    "```\n",
+    "> Setting my threshold to 0.5 would cause false positives for trades that would only have a 51% chance of success\n",
+    "\n",
+    "**What this tells me about how it works:**\n",
+    "\n",
+    "> 0.5 threshold assumes both mistakes cost the same. If being wrong is more expensive than missing out, this firm would cease to exist for the next trade. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d776da8b-4a80-4e4e-86d6-61ca69b79e29",
+   "metadata": {},
+   "source": [
+    "### Break 2: Multiply your false negative cost by 10 and recompute the threshold.\n",
+    "\n",
+    "**Exact error or behavior I observed:**\n",
+    "\n",
+    "```\n",
+    "\n",
+    "```\n",
+    "> The new false negative cost is $100. \n",
+    " 500/(500+100) decreasing the threshold from 0.98 to 0.83\n",
+    "\n",
+    "**What this tells me about how it works:**\n",
+    "\n",
+    "> The financial penalty for missing a good trade gets higher, there would be more aggressive predictions as it’s more risky by acting on lower confidence 83%. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ec1c8336-a106-4d37-b22a-00be328f8800",
+   "metadata": {},
+   "source": [
+    "### Break 3: Remove your three strongest features from the framing and ask whether the problem is still solvable.\n",
+    "\n",
+    "**Exact error or behavior I observed:**\n",
+    "\n",
+    "```\n",
+    "\n",
+    "```\n",
+    "> This would leave the model completely blind and act on random guesses.\n",
+    "\n",
+    "**What this tells me about how it works:**\n",
+    "\n",
+    "> Without the strongest features from useful datasets, a model is no longer predicting but guessing. The remaining features like elapsed time or traffic wouldn’t solve the problem of  guessing if the profit will be big enough to cover the hidden transaction fees."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c7919407-4d12-469b-b46b-be7f0152514f",
+   "metadata": {},
+   "source": [
+    "## 3. Results\n",
+    "\n",
+    "**Your business request in two sentences**\n",
+    "\n",
+    "> \"We are losing money, trading stablecoins because our team is trying to do the math in their heads under pressure and guessing if the profit will be big enough to cover the hidden transaction fees.\"\n",
+    "\n",
+    "**Your ML problem block**\n",
+    "\n",
+    ">  ML PROBLEM\n",
+    "```\n",
+    "  Type:      classification \n",
+    "  Input:     one potential arbitrage trade\n",
+    "  Features:  size of the price gap, volume of coins , network fees, time of first price gap, \n",
+    "             number of failed similar trades in the last 10minutes.\n",
+    "  Output:    probability score between 0 and 1 that the trade’s profit will successfully cover all fees.  \n",
+    "  Decision:  if the probability score is higher than the threshold then automatically execute the trade.\n",
+    "```\n",
+    "\n",
+    "**Your computed threshold with the arithmetic**\n",
+    "\n",
+    "```\n",
+    "cost of a wrongly made trade (false positive): $500\n",
+    "cost of a missed trade (false negative): $10\n",
+    "\n",
+    "executue a trade whenever p(success) * 510 > 500\n",
+    "                          p(success)       > 500/510\n",
+    "                          p(success)       > 0.98\n",
+    "                          \n",
+    "```\n",
+    "\n",
+    "**Your chosen metric and its defense**\n",
+    "\n",
+    "> Metrics: \n",
+    "Cost of a False positive: cost of a wrongly made trade `$500`\n",
+    "Cost of False negative: cost of a missed trade `$10`\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "27bd6c0c-4b0d-4e85-bc69-72294d93f114",
+   "metadata": {},
+   "source": [
+    "## 4. Reflection\n",
+    "\n",
+    "Your own words. No AI assistance. Graders check these against the outputs in your notebook."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "29d07a34-8ecb-4903-bea3-76137ec931e2",
+   "metadata": {},
+   "source": [
+    "### 1. Report your Step 2 threshold prediction and your Step 3 computed threshold. If they differed, explain what your instinct was tracking that the money was not, or the reverse.\n",
+    "\n",
+    "> ML PROBLEM\n",
+    "\n",
+    "```Type:     classification \n",
+    "  Input:     one potential arbitrage trade\n",
+    "  Features:  size of the price gap, volume of coins , network fees, time of first price gap, \n",
+    "             number of failed similar trades in the last 10minutes.\n",
+    "  Output:    probability score between 0 and 1 that the trade’s profit will successfully cover all fees.  \n",
+    "  Decision:  if the probability score is higher than the threshold then automatically execute the trade.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "25f61353-9dd9-4612-8756-c339633d9762",
+   "metadata": {},
+   "source": [
+    "### 2. State the weakest point in your data and explain concretely how a model trained on it could look successful in testing and still fail in production.\n",
+    "\n",
+    "> The weakest point in my data is the simulated outcomes and lacking historical records. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "84f07bc0-3091-4a51-a212-465c9a7d37fb",
+   "metadata": {},
+   "source": [
+    "### 3. In the third break it exercise you removed your strongest features. Say what happened to the problem and what that reveals about whether you are solving a machine learning problem or a data collection problem.\n",
+    "\n",
+    "> Without the price gap, network fees, volume, time elapsed and similar trade outcomes, predictions would be random guesses. This is a data collection problem. \n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "75ab47ca-d86e-4836-a32f-e2e0a4d333c7",
+   "metadata": {},
+   "source": [
+    "### 4. Someone senior tells you the threshold should be 0.5 because that is standard. Write the two sentence reply you would actually send, using your own numbers.\n",
+    "\n",
+    "> The standard of a 0.5 threshold assumes that mistakes have equal weights or costs. A bad trade could be a `$500` loss whereas a missed opportunity would potentially be `$10` in missed profit, therefore a higher threshold is recommended to be more certain of trades predicted to take."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b41b1e53-aefa-4220-8dab-81f18565fa90",
+   "metadata": {},
+   "source": [
+    "## 5. AI use disclosure\n",
+    "\n",
+    "Required by the course AI Use Policy. Write none if you used no AI.\n",
+    "\n",
+    "- **Tool used:** Gemini\n",
+    "- **What I asked for:** \n",
+    "\n",
+    "> Features needed for a Stablecoin Arbitrage Engine.\n",
+    "\n",
+    "- **What I used from it:** \n",
+    "\n",
+    "> The top features most significant to executing the correct trades.\n",
+    "\n",
+    "- **How I verified it:** \n",
+    "\n",
+    "> By matching the features listed to similar algorithmic trading systems used in the live exchange market."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c5d79dc2-498c-44e2-a737-5aed701c0ac2",
+   "metadata": {},
+   "source": [
+    "## 6. Checklist\n",
+    "\n",
+    "- [x] Predictions written before running\n",
+    "- [x] Actual results recorded, including the ones I got wrong\n",
+    "- [ ] Exact error text captured for every break it item\n",
+    "- [x] Notebook runs top to bottom with outputs visible\n",
+    "- [x] PDF exported after the full run\n",
+    "- [x] Reflection written by me\n",
+    "- [x] Files uploaded individually, no archive"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "c94368e0-9f62-4c34-ba74-c9d6c29d0b69",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "/Users/almad\n"
+     ]
+    }
+   ],
+   "source": [
+    "import os\n",
+    "print(os.getcwd())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "c0b930aa-64ca-478b-b831-c7416b422b2f",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
